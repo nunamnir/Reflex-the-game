@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reflex, the game</title>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="reflex.css">
+	<script type="text/javascript" src="reflex.js"></script>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Счет: <p id="player-count"></p></li>
+			<li>Попадание: <p id="player-hit"></p></li>
+			<li>Промах: <p id="player-miss"></p></li>
+			<li>Точность: <p id="player-accur"></p></li>
+		</ul>
+		<div class="cover-div">
+			<div class="login-window">
+				<div class="game-content">
+					<h1>Правила игры</h1>
+					<p>
+						Игроку отводится 60 секунд на уничтожение шаров. Чем мельче шар — тем больше баллов игрок за него получит. Кто наберёт большее кол-во баллов — тот и победит. Осторожно, промахи отнимаются при подсчёте конечного результата!
+					</p>
+				</div>
+				<table class="info-table">
+					<tr>
+						<td>Введите Имя:</td>						
+					</tr>
+					<tr>							
+						<td><input id="get-name" type="text" size="11" placeholder="Инкогнито"></td>
+					</tr>
+					<tr>							
+						<td><input id="submit-button" type="submit" value="Начать игру"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="stats-window">
+				<table class="stats-table">
+					<tr>
+						<td colspan="2">
+							<span id="login-stat"></span>
+						</td>
+					</tr>
+					<tr>
+						<td><span id="bold">Попаданий: </span></td>
+						<td><span id="hit-stat"></span></td>
+					</tr>
+					<tr>
+						<td><span id="bold">Промахов: </span></td>
+						<td><span id="miss-stat"></span></td>
+					</tr>
+					<tr>
+						<td><span id="bold">Точность: </span></td>
+						<td><span id="accur-stat"></span></td>
+					</tr>
+					<tr>
+						<td><span id="bold">Всего баллов: </span></td>
+						<td><span id="score-stat"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input id="restart-button" type="submit" value="Начать заново">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</header>
+	<section id="playground"></section>
+	<footer>
+		<div id="timer"></div>
+	</footer>
+</body>
+</html>
