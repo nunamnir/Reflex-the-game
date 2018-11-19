@@ -1,12 +1,14 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
 	padding: 0;
 	margin: 0;
 
-	background: url("img/global1-bg.jpg");
+	background-color: black;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -14,11 +16,11 @@ body {
 	position: relative;
 }
 
-header {
+#stat-bar {
 	width: 100%;
-	height: 5vh;
+	height: 3vh;
 	background: rgba(0, 0, 0, 1);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+	border-bottom: 0.5px solid rgba(255, 255, 255, 0.9);
 
 	display: flex;
 	justify-content: center;
@@ -46,6 +48,7 @@ ul li {
 
   padding-right: 80px;
   padding-left: 80px;
+  /*width: 300px;*/
 }
 
 li p {
@@ -53,70 +56,176 @@ li p {
 	color: white;
 }
 
-section {
+/*section {
 	width: 100%;
 	height: 93vh;
 	z-index: 1;
-}
+}*/
 
-footer {
-	width: 99.7%;
-	height: 2vh;
-}
-
-.cover-div {
-	display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+#login-sheet {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
   width: 100%;
   height: 100%;
-  background: url("img/statistic-bg01.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+	text-transform: uppercase;
+/*	font-weight: bold;
+	font-size: 45px;*/
 }
 
-.login-window {
-	display: none;
-	position: absolute;
-	top: 15%;
-	left: 35%;
-	bottom: 15%;
-	right: 35%;
-	z-index: 3;
-	background: rgba(222, 222, 222, 0.95);
+#login-window {
+	background-image: url("img/main-bg.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 
-	/*display: flex;*/
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 
-	border-collapse: separate;
-	border-style: solid;
-	border-width: 5px;
-	border-color: goldenrod;
+	width: 100%;
+	height: 100vh;
+}
+
+#artists {
+	position: absolute;
+	color: gray;
+	font-family: cambria, sans-serif;
+	font-variant: small-caps;
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	top: 0px;
+	font-size: 22px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	width: 100%;
+	height: 42px;
+}
+
+#tools {
+	position: absolute;
+	/*font-family: Verdana, sans-serif;*/
+	font-family: cambria, sans-serif;
+	font-variant: small-caps;
+	text-shadow: 0px 0px 2px white;
+	bottom: 0px;
+	color: black;
+	font-size: 22px;
+	font-weight: bold;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	width: 100%;
+	height: 82px;
+}
+
+.tools-wrap {
+	/*position: absolute;*/
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+}
+
+#html {
+	height: 50px;
+	width: 50px;
+}
+
+#css {
+	height: 50px;
+	width: 50px;
+}
+
+#js {
+	height: 50px;
+	width: 50px;
+}
+
+#jq {
+	height: 50px;
+	width: 50px;
 }
 
 .game-content {
+	width: 500px;
 	text-align: justify;
 	text-transform: none;
 	margin: 10px 20px 10px 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .game-content h1 {
+	color: white;
 	text-transform: uppercase;
 	text-align: center;
 	font-size: 30px;
 }
 
-.game-content p {
+/*.game-content p {
 	font-size: 18px;
 	font-style: italic;
+}*/
+
+#game-name{
+	font-family: Verdana, sans-serif;
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	text-transform: uppercase;
+	font-size: 35px;
+	color: goldenrod;
+	font-weight: bold;
 }
 
-.info-table {
+#description {
+	font-family: Verdana, sans-serif;
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	font-size: 16px;
+	color: white;
+	/*font-weight: bold;*/
+	margin: 20px 0 20px 0;
+}
+
+#start-button {
+  display: block;
+  font-family: Trebuchet MS, sans-serif;
+  color: rgb(204, 51, 0);
+  font-size: 30px;
+  text-shadow: 1px 1px 2px black, 0 0 1em black;
+  background-color: rgba(128,128,128, 0);
+  transition: 0.3s;
+  border: none;
+  font-weight: bold;
+
+}
+
+#push-button {
+	transition: all 0.5s ease-out;
+}
+
+.blink {
+	opacity: 0;
+/*	display: none;
+	visibility: hidden;*/
+}
+
+#insert-name-style {
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	font-size: 25px;
+	color: gold;
+	font-weight: bold;
+}
+
+#info-table {
 	border-collapse: separate;
 	border-style: solid;
 	border-width: 3px;
@@ -124,37 +233,37 @@ footer {
 	padding: 10px;
 }
 
-.stats-window {
+#info-table td {
+	font-size: 16px;
+	text-align: center;
+}
+
+#stats-sheet {
 	display: none;
-	position: absolute;
-	top: 15%;
-	left: 35%;
-	bottom: 15%;
-	right: 35%;
-	z-index: 3;
-	background: rgba(222, 222, 222, 0.95);
+	position: relative;
+	z-index: 1;
+	background: url("img/main-bg.jpg") center no-repeat / cover;
 
 	/*display: flex;*/
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 
-	border-collapse: separate;
-	border-style: solid;
-	border-width: 5px;
-	border-color: goldenrod;
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
 }
 
 .stats-table {
 	border-collapse: separate;
 	border-spacing: 10px;
-	/*border: 5px solid gray;*/
+	/*background: gray;*/
 }
 
 .stats-table td {
-	/*border: 3px solid red;*/
+	/*border: 3px solid red;*/	
+	/*padding-right: 20px;*/
 	padding: 10px;
-	padding-right: 20px;
 	text-align: center;
 }
 
@@ -167,53 +276,130 @@ footer {
   -moz-animation: rotation 20s linear infinite;*/
 }
 
-	@-webkit-keyframes rotation {
+	@-webkit-keyframes rotation1 {
 	  0%   { -webkit-transform: rotate(0deg); }
 	  100% { -webkit-transform: rotate(360deg); }
 	}
 
-	@-moz-keyframes rotation {
+	@-webkit-keyframes rotation2 {
+	  0%   { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(-360deg); }
+	}
+
+	@-moz-keyframes rotation1 {
 	  0%   { -moz-transform: rotate(0deg); }
 	  100% { -moz-transform: rotate(360deg); }
 	}
 
+	@-moz-keyframes rotation2 {
+	  0%   { -moz-transform: rotate(0deg); }
+	  100% { -moz-transform: rotate(-360deg); }
+	}
+
 #bold {
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	color: white;
 	font-weight: bold;
 	text-transform: uppercase;
-	text-align: right;
+	/*text-align: right;*/
 	font-size: 20px;
 }
 
 #timer {
-	width: 99.7%;
+	position: absolute;
+	width: 100%;
 	height: 2vh;
+	bottom: 0px;
 	background: goldenrod;
 	border-right: 8px solid red;
 	transition: all 1s linear;
 }
 
-#login-stat {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 45px;
-}
-
-#hit-stat, #miss-stat, #score-stat, #accur-stat {
+#hit-stat, #miss-stat, #accur-stat, #score-stat {
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
 	font-size: 25px;
-	color: red;
+	color: gold;
 	font-weight: bold;
 }
 
-#restart-button {
+.login-stat {
+	text-shadow: 1px 1px 2px black, 0 0 1em black;
+	color: goldenrod;
+	font-weight: bold;
+	text-transform: uppercase;
+	/*text-align: right;*/
+	font-size: 35px;
+}
+
+#restart-game-button {
+	margin-top: 50px;
+	height: 60px;
+	width: 180px;
   padding: 3px 7px;
-  color: #333;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
   border-radius: 5px;
   border: 1px solid #666;
   background: -moz-linear-gradient(#00bbd6, #ebffff);
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#00BBD6), to(#EBFFFF));
+	transition: all 0.5s ease-out;
 }
 
+#gamezone {
+	display: none;
+	background: url("img/main-bg.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
+}
+
+#info-menu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*#info-menu span {
+	display: inline;
+
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gold;
+
+  padding-right: 80px;
+  padding-left: 80px;
+  width: 100px;
+}*/
+
 #playground {
+	width: 100%;
+	height: 95vh;
+	z-index: 1;
 	position: relative;
 	cursor: crosshair;
 }
+
+.hitBlast {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background: url(img/explosion.gif) no-repeat center / cover;
+	/*background-size: cover;*/
+	z-index: 10;
+}
+
+/*.missBlast {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background: url(img/explosion-5.gif) no-repeat center / cover;
+	z-index: 10;
+}*/
+

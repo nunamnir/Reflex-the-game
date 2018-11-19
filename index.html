@@ -5,71 +5,123 @@
 	<title>Reflex, the game</title>
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="reflex.css">
-	<script type="text/javascript" src="reflex.js"></script>
+	<link rel="stylesheet" type="text/css" href="fontello/css/fontello.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="reflex.js"></script>	
 </head>
 <body>
-	<header>
-		<ul>
-			<li>Счет: <p id="player-count"></p></li>
-			<li>Попадание: <p id="player-hit"></p></li>
-			<li>Промах: <p id="player-miss"></p></li>
-			<li>Точность: <p id="player-accur"></p></li>
-		</ul>
-		<div class="cover-div">
-			<div class="login-window">
-				<div class="game-content">
-					<h1>Правила игры</h1>
-					<p>
-						Игроку отводится 60 секунд на уничтожение шаров. Чем мельче шар — тем больше баллов игрок за него получит. Кто наберёт большее кол-во баллов — тот и победит. Осторожно, промахи отнимаются при подсчёте конечного результата!
-					</p>
-				</div>
-				<table class="info-table">
-					<tr>
-						<td>Введите Имя:</td>						
-					</tr>
-					<tr>							
-						<td><input id="get-name" type="text" size="11" placeholder="Инкогнито"></td>
-					</tr>
-					<tr>							
-						<td><input id="submit-button" type="submit" value="Начать игру"></td>
-					</tr>
-				</table>
+	<section id="login-sheet">
+		<header id="artists">
+			<span class="icon-eye">Victor Hunko</span>
+			<span class="icon-user">Oleg Savluchenko</span>
+			<span class="icon-globe">2018</span>
+		</header>
+		<div id="login-window">
+			<div class="game-content">
+				<img id="i" src="img/diablo-rift.gif" alt="">
+				<p id="game-name">
+					Рефлекс
+				<p>
+				<p id="description">
+					Уничтожь как можно больше планет в течение 60 секунд, используй курсор мыши для прицеливания и левую кнопку для уничтожения. Старайся не промазать, промахи повлияют на конечный результат. Удачи!
+				</p>
 			</div>
-			<div class="stats-window">
-				<table class="stats-table">
-					<tr>
-						<td colspan="2">
-							<span id="login-stat"></span>
-						</td>
-					</tr>
-					<tr>
-						<td><span id="bold">Попаданий: </span></td>
-						<td><span id="hit-stat"></span></td>
-					</tr>
-					<tr>
-						<td><span id="bold">Промахов: </span></td>
-						<td><span id="miss-stat"></span></td>
-					</tr>
-					<tr>
-						<td><span id="bold">Точность: </span></td>
-						<td><span id="accur-stat"></span></td>
-					</tr>
-					<tr>
-						<td><span id="bold">Всего баллов: </span></td>
-						<td><span id="score-stat"></span></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input id="restart-button" type="submit" value="Начать заново">
-						</td>
-					</tr>
-				</table>
+			<div id="press-start">
+				<button id="start-button" type="button">
+					<span id="push-button">
+						Нажмите клавишу Enter
+					</span>
+				</button>
 			</div>
 		</div>
-	</header>
-	<section id="playground"></section>
-	<footer>
-		<div id="timer"></div>
-	</footer>
+		<footer id="tools">
+			<div class="tools-wrap">
+				<img id="html" src="tools/html-logo.png" alt="">
+				<span>HTML</span>		
+			</div>
+			<div class="tools-wrap">
+				<img id="css" src="tools/css-logo.png" alt="">
+				<span>CSS</span>
+			</div>
+			<div class="tools-wrap">
+				<img id="js" src="tools/js-logo.png" alt="">
+				<span>JavaScript</span>
+			</div>
+			<div class="tools-wrap">	
+				<img id="jq" src="tools/jquery-logo.png" alt="">
+				<span>jQuery</span>
+			</div>
+		</footer>
+	</section>
+	<section id="gamezone">
+		<header id="stat-bar">
+			<ul>
+				<li>Счет: <p id="player-count"></p></li>
+				<li>Попадание: <p id="player-hit"></p></li>
+				<li>Промах: <p id="player-miss"></p></li>
+				<li>Точность: <p id="player-accur"></p></li>
+			</ul>
+		</header>
+		<section id="playground"></section>
+		<footer id="timer"></footer>
+	</section>
+	<section id="stats-sheet">
+		<header id="artists">
+			<span class="icon-eye">Victor Hunko</span>
+			<span class="icon-user">Oleg Savluchenko</span>
+			<span class="icon-globe">2018</span>
+		</header>		
+		<table class="stats-table">
+			<tr>
+				<td colspan="2">
+					<span class="login-stat">Результаты</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span id="bold">Попаданий: </span></td>
+				<td><span id="hit-stat"></span></td>
+			</tr>
+			<tr>
+				<td><span id="bold">Промахов: </span></td>
+				<td><span id="miss-stat"></span></td>
+			</tr>
+			<tr>
+				<td><span id="bold">Точность: </span></td>
+				<td><span id="accur-stat"></span></td>
+			</tr>
+			<tr>
+				<td><span id="bold">Всего баллов: </span></td>
+				<td><span id="score-stat"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button id="restart-game-button" type="submit">
+						<span id="button-text">
+							Начать заново
+						</span>
+					</button>
+					<!-- input  id="restart-game-button" type="submit" value="Начать заново"> -->
+				</td>
+			</tr>
+		</table>
+		<footer id="tools">
+			<div class="tools-wrap">
+				<img id="html" src="tools/html-logo.png" alt="">
+				<span>HTML</span>		
+			</div>
+			<div class="tools-wrap">
+				<img id="css" src="tools/css-logo.png" alt="">
+				<span>CSS</span>
+			</div>
+			<div class="tools-wrap">
+				<img id="js" src="tools/js-logo.png" alt="">
+				<span>JavaScript</span>
+			</div>
+			<div class="tools-wrap">	
+				<img id="jq" src="tools/jquery-logo.png" alt="">
+				<span>jQuery</span>
+			</div>
+		</footer>		
+	</section>
 </body>
 </html>

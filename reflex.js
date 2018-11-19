@@ -30,6 +30,7 @@ function displayStatus() {
 	// document.getElementById("player-name").innerHTML = name;
 }
 
+// переделать звуки из млюбимой игры вставить
 function playSound(string) {
 	switch(string) {
 		case 'intro':
@@ -39,12 +40,12 @@ function playSound(string) {
 			break;
 		case 'hit':
 			var soundHit = new Audio(); // Создаём новый элемент Audio
-			soundHit.src = "audio/icq-hit.wav"; // Указываем путь к звуку "клика"
+			soundHit.src = "audio/blaster-shot.mp3"; // Указываем путь к звуку "клика"
 			soundHit.play();
 			break;
 		case 'miss':
 			var soundMiss = new Audio(); // Создаём новый элемент Audio
-			soundMiss.src = "audio/icq-miss.wav"; // Указываем путь к звуку "клика"
+			soundMiss.src = "audio/miss-shot.mp3"; // Указываем путь к звуку "клика"
 			soundMiss.play();
 			break;
 		case 'stat':
@@ -55,19 +56,48 @@ function playSound(string) {
 	}
 }
 
-function useLoginWindow() {
-	playSound('intro');
-	document.getElementsByClassName('cover-div')[0].style.display = 'block';
-	document.getElementsByClassName('login-window')[0].style.display = 'flex';
-	document.getElementsByClassName('stats-window')[0].style.display = 'none';
+// Фаза 1
+function useLoginWindow() {	
+	console.log("Фаза 1");
+	$("#login-sheet").css("display", "flex");
+	$("#gamezone").css("display", "none");
+	$("#stats-sheet").css("display", "none");
+	$(document).on("keydown", startEnter);
 
-	var submitEvent = document.getElementById('submit-button');
-	submitEvent.addEventListener("click", start);
+	var hideInterval;
+	switchState();
+
+	function hideShow() {
+  	$("#push-button").toggleClass("blink");
+	};
+
+	function switchState() {
+    hideInterval = setInterval(function() {
+  		hideShow();
+		}, 800);
+		return;
+	};
+
+	function startEnter(event) {
+		// console.log(event);
+		if(event.key == "Enter") {
+			$(document).off("keydown", startEnter);
+			clearInterval(hideInterval);
+			setScenario("game_scenario");
+		}
+	}
 }
 
+// Фаза 2
 function useGameWindow() {
-	var playground = document.getElementById("playground");
-	playground.addEventListener("click", destroyObj);
+	console.log("Фаза 2");
+	$("#login-sheet").css("display", "none");
+	$("#gamezone").css("display", "block");
+	$("#stats-sheet").css("display", "none");
+
+	// var playground = document.getElementById("playground");
+	// playground.addEventListener("click", destroyObj);
+	$("#playground").on("click", destroyObj);
 
 	var max_width = (playground.clientWidth) - 80;
 	var max_height = (playground.clientHeight) - 80;
@@ -80,36 +110,75 @@ function useGameWindow() {
 	displayStatus();
 
 	var start = Date.now();	// инициализируем время
-	var Interval = setInterval(function() {
+	var gameTime = setInterval(function() {
 		addCircle();
 		if (Date.now() - start > 60000) {
 			playground.innerHTML = null;
-			clearInterval(Interval);
-			clearInterval(Time);
-			setScenario('stat_scenario');  
+			clearInterval(gameTime);
+			clearInterval(curTime);
+			setScenario("stat_scenario");  
 			return;
 		}
 	}, 2000);
 
-	var Time = setInterval(function () {
+	var curTime = setInterval(function () {
 		var counter = Date.now() - start;
-		console.warn(counter);
+		// console.warn(counter);
 		timeLeft(counter);
-			function timeLeft(counter) {    
-			var timer = document.getElementById("timer");
-			timer.style.width = (100 * ((60000 - counter) / 60000)) + '%';
-			// console.warn(timer.style.width);
-			if(counter >= 59000) {
-				timer.style.width = 0 + '%';
+		function timeLeft(count) {
+			$("#timer").css("width", (100 * ((60000 - count) / 60000) + '%'));
+			if(count >= 59000) {
+				$("#timer").css("width", "0%");
 			}
 		}
 	}, 1000);
 
+	function addCircle() {
+		var circle = document.createElement("div");
+		circle.className = "circle";
+		
+		setCircleRotate();
+		setCircleStyle();
+		setCircleSize();
+		displayStatus();
+
+		function setCircleRotate() {
+		  circle.style.animation = 'rotation' + getRandValue(1, 2) + ' ' + getRandValue(10, 60) + 's linear infinite';
+		}
+
+		function setCircleStyle() {
+			circle.style.backgroundImage = 'url(img/planets/planet-' + getRandValue(1, 34) + '.png)';
+			// console.warn(circle.style.backgroundImage);
+		}
+
+		function setCircleSize() {
+			var size = getRandValue(30, 60);
+			circle.style.height = size + "px";
+			circle.style.width = size + "px";
+		}
+
+		circle.style.left = getRandValue(1, max_width) + 'px';
+		circle.style.top = getRandValue(1, max_height) + 'px';
+		playground.appendChild(circle);
+	}
+
 	function destroyObj(event) {
 		if(event.target.className == "circle") {
+			// console.log("clientX" + event.clientX);
+			// console.log("clientY" + event.clientY);
 			event.stopPropagation();
-			var width = event.target.clientWidth;
 
+			$("<div>", {
+   		 class: "hitBlast"
+			}).appendTo("#playground");
+			$(".hitBlast").css("top", (event.clientY - 65) + "px");
+			$(".hitBlast").css("left", (event.clientX - 53) + "px");
+			// playground.appendChild(newAnimation);
+			setTimeout(function () {
+				$(".hitBlast").remove();
+			}, 500);
+
+			var width = event.target.clientWidth;
 			switch(true) {
 				// case (width === 20):
 				// 	count+=5;
@@ -125,7 +194,7 @@ function useGameWindow() {
 					break;
 				default:
 					count+=1;
-					break;  
+					break;
 			}
 
 			playSound('hit');
@@ -140,66 +209,42 @@ function useGameWindow() {
 			displayStatus();
 		}
 	}
+} // конец Фазы 2
 
-	function addCircle() {
-		var circle = document.createElement("div");
-		circle.className = "circle";
-		
-		setCircleRotate();
-		setCircleStyle();
-		setCircleSize();
-		displayStatus();
-
-		function setCircleRotate() {
-			// animation: rotation 20s linear infinite;
-		  circle.style.animation = 'rotation ' + getRandValue(10, 60) + 's linear infinite';
-		}
-
-		function setCircleStyle() {
-			circle.style.backgroundImage = 'url(img/planets/planet-' + getRandValue(1, 30) + '.png)';
-			// console.warn(circle.style.backgroundImage);
-		}
-
-		function setCircleSize() {
-			var size = getRandValue(30, 60);
-			circle.style.height = size + "px";
-			circle.style.width = size + "px";
-		}
-
-		circle.style.left = getRandValue(1, max_width) + 'px';
-		circle.style.top = getRandValue(1, max_height) + 'px';
-		playground.appendChild(circle);
-	}
-}
-
+// Фаза 3
 function useStatWindow() {
 	// playSound('stat');
-	document.getElementsByClassName('cover-div')[0].style.display = 'block';
-	document.getElementsByClassName('stats-window')[0].style.display = 'flex';
-	document.getElementsByClassName('login-window')[0].style.display = 'none';
+	console.log("Фаза 3");
+	$("#login-sheet").css("display", "none");
+	$("#gamezone").css("display", "none");
+	$("#stats-sheet").css("display", "flex");
 
-	document.getElementById("login-stat").innerHTML = name;
-	document.getElementById("score-stat").innerHTML = count;
-	document.getElementById("hit-stat").innerHTML = hit;
-	document.getElementById("miss-stat").innerHTML = miss;
-	document.getElementById("accur-stat").innerHTML = calcAccuracy() + "%";
+	$("#login-stat").html(name);
+	$("#score-stat").html(count);
+	$("#hit-stat").html(hit);
+	$("#miss-stat").html(miss);
+	$("#accur-stat").html((calcAccuracy() + "%"));
+	$("#restart-game-button").on("click", restartGame);
 
-	var restartEvent = document.getElementById('restart-button');
-	restartEvent.addEventListener("click", restart);
-}
+	var showInterval;
+	switchState();
 
-function start() {
-	name = document.getElementById('get-name').value;
-	document.getElementById("login-stat").innerHTML = name;
-	document.getElementsByClassName('cover-div')[0].style.display = 'none';
-	document.getElementsByClassName('stats-window')[0].style.display = 'none';
-	setScenario('game_scenario');
-}
+	function hideShow() {
+  	$("#button-text").toggleClass("blink");
+	};
 
-function restart() {
-	document.getElementsByClassName('cover-div')[0].style.display = 'none';
-	document.getElementsByClassName('stats-window')[0].style.display = 'none';
-	setScenario('login_scenario');
+	function switchState() {
+    showInterval = setInterval(function() {
+  		hideShow();
+		}, 500);
+		return;
+	};
+
+	function restartGame() {		
+		$("#restart-game-button").off("click", restartGame);
+		clearInterval(showInterval);
+		setScenario("game_scenario");
+	}
 }
 
 function calcAccuracy() {
